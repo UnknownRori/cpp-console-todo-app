@@ -6,14 +6,12 @@
 
 class TodoApp
 {
-    std::vector<TodoItem> TodoLists;
+    std::vector<TodoItem *> TodoLists;
 
 public:
-    TodoApp();
     void create(std::string);
     void update(int, std::string);
-    void finish(int);
-    void unfinish(int);
+    void toggleFinish(int);
     void destroy(int);
     void printLists();
 };
