@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 #include "../include/TodoApp.h"
 #include "../include/TodoItem.h"
 
@@ -28,10 +29,33 @@ void TodoApp::destroy(int index)
 
 void TodoApp::printLists()
 {
+    const int indexWidth = 7;
+    const int dataWidth = 64;
+    const int completeWidth = 11;
+
     int index = 0;
+
+    using std::setw;
+    std::cout << std::left;
+    std::cout << setw(indexWidth) << "[Index]" << setw(dataWidth) << "[Task]" << setw(completeWidth) << "[Complete]"
+              << "\n";
     for (const auto &todo : TodoLists)
     {
-        std::cout << "No : " << index << " " << todo->data << " " << todo->finished << "\n";
+        std::string finishStatus;
+
+        if (todo->finished)
+        {
+            finishStatus = "V";
+        }
+        else
+        {
+            finishStatus = "X";
+        }
+        std::cout << setw(indexWidth) << index << setw(dataWidth) << todo->data << setw(completeWidth) << finishStatus
+                  << "\n";
+
+        // std::cout
+        //     << index << " | " << todo->data << " | " << finishStatus << "\n";
         index++;
     }
 }
