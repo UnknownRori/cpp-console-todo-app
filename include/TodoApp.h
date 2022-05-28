@@ -10,11 +10,11 @@ class TodoApp
 
 public:
     TodoApp();
-    bool create(std::string);
-    bool update(int, std::string);
-    bool finish(int);
-    bool unfinish(int);
-    bool destroy(int);
+    void create(std::string);
+    void update(int, std::string);
+    void finish(int);
+    void unfinish(int);
+    void destroy(int);
     void printLists();
 };
 
