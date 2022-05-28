@@ -23,13 +23,16 @@ int main()
 
         lowerCase(&buffer);
 
-        if (buffer == "create")
+        if (buffer == "exit")
+            break;
+
+        if (buffer == "create" || buffer == "0")
         {
             std::cout << "Enter Task : ";
             std::getline(std::cin, buffer);
             app->create(buffer);
         }
-        else if (buffer == "edit")
+        else if (buffer == "edit" || buffer == "1")
         {
             int index = 0;
 
@@ -40,7 +43,7 @@ int main()
             std::getline(std::cin, buffer);
             app->update(index, buffer);
         }
-        else if (buffer == "toggle")
+        else if (buffer == "toggle" || buffer == "2")
         {
             int index = 0;
             std::cout << "Which index : ";
@@ -49,7 +52,7 @@ int main()
             app->toggleFinish(index);
             std::cin.ignore();
         }
-        else if (buffer == "delete")
+        else if (buffer == "delete" || buffer == "3")
         {
             int index = 0;
             std::cout << "Which index : ";
@@ -58,17 +61,38 @@ int main()
             app->destroy(index);
             std::cin.ignore();
         }
-        else if (buffer == "print")
+        else if (buffer == "print" || buffer == "4")
         {
+            clearScreen();
             app->printLists();
+            std::cout << "\n";
         }
-        else if (buffer == "clear")
+        else if (buffer == "clear" || buffer == "5")
         {
             clearScreen();
         }
-
-        if (buffer == "exit")
-            break;
+        else if (buffer == "help" || buffer == "6")
+        {
+            clearScreen();
+            std::cout << "0 : create"
+                      << "\n";
+            std::cout << "1 : edit"
+                      << "\n";
+            std::cout << "2 : toggle"
+                      << "\n";
+            std::cout << "3 : delete"
+                      << "\n";
+            std::cout << "4 : print"
+                      << "\n";
+            std::cout << "5 : clear"
+                      << "\n";
+            std::cout << "6 : help"
+                      << "\n";
+        }
+        else
+        {
+            std::cout << "There is no such a command \n";
+        }
     }
 
     free(app);
