@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
 #include <cctype>
 #include <chrono>
 #include <thread>
@@ -9,6 +10,7 @@
 void clearScreen();
 void pause(int miliseconds);
 void lowerCase(std::string *value);
+int strCastInt(std::string &value);
 
 int main()
 {
@@ -34,32 +36,45 @@ int main()
         }
         else if (buffer == "edit" || buffer == "1")
         {
-            int index = 0;
+            std::string input = "";
 
             std::cout << "Which index : ";
-            std::cin >> index;
+            std::cin >> input;
             std::cout << "What the new value is : ";
             std::cin.ignore();
             std::getline(std::cin, buffer);
             std::cout << "\n";
+
+            int index = strCastInt(input);
+
             app->update(index, buffer);
         }
         else if (buffer == "toggle" || buffer == "2")
         {
-            int index = 0;
+            std::string input = "";
+
             std::cout << "Which index : ";
-            std::cin >> index;
+            std::cin >> input;
             std::cout << "\n";
+
+            int index = strCastInt(input);
+
             app->toggleFinish(index);
+
             std::cin.ignore();
         }
         else if (buffer == "delete" || buffer == "3")
         {
-            int index = 0;
+            std::string input = "";
+
             std::cout << "Which index : ";
-            std::cin >> index;
+            std::cin >> input;
             std::cout << "\n";
+
+            int index = strCastInt(input);
+
             app->destroy(index);
+
             std::cin.ignore();
         }
         else if (buffer == "print" || buffer == "4")
@@ -119,4 +134,15 @@ void lowerCase(std::string *value)
     std::transform(value->begin(), value->end(), value->begin(),
                    [](unsigned char c)
                    { return std::tolower(c); });
+}
+
+int strCastInt(std::string &value)
+{
+    std::stringstream ss;
+    int result;
+
+    ss << value;
+    ss >> result;
+
+    return result;
 }
