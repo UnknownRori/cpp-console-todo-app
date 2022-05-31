@@ -41,6 +41,7 @@ int main()
             std::cout << "What the new value is : ";
             std::cin.ignore();
             std::getline(std::cin, buffer);
+            std::cout << "\n";
             app->update(index, buffer);
         }
         else if (buffer == "toggle" || buffer == "2")
