@@ -4,6 +4,13 @@
 #include "../include/TodoApp.h"
 #include "../include/TodoItem.h"
 
+bool TodoApp::checkIndex(int index)
+{
+    if (0 < index || index > size(TodoLists))
+        return true;
+    return false;
+}
+
 void TodoApp::create(std::string value)
 {
     TodoLists.push_back(new TodoItem(value));
@@ -11,20 +18,35 @@ void TodoApp::create(std::string value)
 
 void TodoApp::update(int index, std::string newValue)
 {
-    TodoItem *todo = TodoLists.at(index);
-    todo->data = newValue;
+    if (checkIndex(index))
+        std::cout << "Input Index should match with the data! \n";
+    else
+    {
+        TodoItem *todo = TodoLists.at(index);
+        todo->data = newValue;
+    }
 }
 
 void TodoApp::toggleFinish(int index)
 {
-    TodoItem *todo = TodoLists.at(index);
-    todo->finished = !todo->finished;
+    if (checkIndex(index))
+        std::cout << "Input Index should match with the data! \n";
+    else
+    {
+        TodoItem *todo = TodoLists.at(index);
+        todo->finished = !todo->finished;
+    }
 }
 
 void TodoApp::destroy(int index)
 {
-    free(TodoLists.at(index));
-    TodoLists.erase(TodoLists.begin() + index);
+    if (checkIndex(index))
+        std::cout << "Input Index should match with the data! \n";
+    else
+    {
+        free(TodoLists.at(index));
+        TodoLists.erase(TodoLists.begin() + index);
+    }
 }
 
 void TodoApp::printLists()
@@ -53,9 +75,6 @@ void TodoApp::printLists()
         }
         std::cout << setw(indexWidth) << index << setw(dataWidth) << todo->data << setw(completeWidth) << finishStatus
                   << "\n";
-
-        // std::cout
-        //     << index << " | " << todo->data << " | " << finishStatus << "\n";
         index++;
     }
 }

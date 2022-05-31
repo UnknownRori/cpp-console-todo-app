@@ -7,6 +7,7 @@
 class TodoApp
 {
     std::vector<TodoItem *> TodoLists;
+    bool checkIndex(int);
 
 public:
     void create(std::string);
